@@ -11,6 +11,7 @@ RSpec.configure do |config|
   end
 end
 
+require "lutaml/model"
 Lutaml::Model::Config.configure do |config|
   config.xml_adapter_type = :nokogiri
 end

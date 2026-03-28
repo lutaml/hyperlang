@@ -2,9 +2,14 @@
 
 source "https://rubygems.org"
 
+# Specify your gem's dependencies in xml-c14n.gemspec
 gemspec
 
-gem "nokogiri", "~> 1.0"
-gem "rake", "~> 13.0"
-gem "rspec", "~> 3.0"
-gem "rubocop", "~> 1.0"
+gem "lutaml-model", github: "lutaml/lutaml-model", branch: "main"
+gem "nokogiri"
+gem "rake"
+gem "rspec"
+gem "rubocop"
+gem "rubocop-performance"
+gem "rubocop-rake"
+gem "rubocop-rspec"
