@@ -1,0 +1,176 @@
+= hyperlang
+
+Complete XHTML 1.1 element model library for Lutaml.
+
+== Overview
+
+hyperlang provides Ruby object models for every XHTML 1.1 element (Strict, Transitional, and Frameset variants), built on top of `lutaml-model`. Each element class inherits from `Lutaml::Model::Serializable` and supports XML round-trip serialization via the `xml` DSL.
+
+== Installation
+
+Add to your Gemfile:
+
+[source,ruby]
+gem "hyperlang", "~> 0.1.0"
+
+== Usage
+
+=== Parsing XHTML
+
+[source,ruby]
+require "hyperlang"
+
+html = Hyperlang::Xhtml::Html.from_xml(xhtml_string)
+puts html.head.title.content
+puts html.body.div.first.p.first.content
+
+=== Generating XHTML
+
+[source,ruby]
+html = Hyperlang::Xhtml::Html.new(
+  head: Hyperlang::Xhtml::Head.new(
+    title: Hyperlang::Xhtml::Title.new(content: "My Page")
+  ),
+  body: Hyperlang::Xhtml::Body.new(
+    div: [
+      Hyperlang::Xhtml::Div.new(
+        p: [Hyperlang::Xhtml::P.new(content: "Hello world")]
+      )
+    ]
+  )
+)
+
+puts html.to_xml
+
+== Elements
+
+All 99 XHTML element classes live under `Hyperlang::Xhtml::`:
+
+=== Structure
+
+|===
+| Element | Class
+| `<html>` | `Html`
+| `<head>` | `Head`
+| `<title>` | `Title`
+| `<body>` | `Body`
+|===
+
+=== Text Block
+
+`Div`, `P`, `Pre`, `Address`, `H1`-`H6`, `Blockquote`, `Hr`
+
+=== Text Inline
+
+Phrasal:: `Abbr`, `Acronym`, `Cite`, `Code`, `Dfn`, `Em`, `Kbd`, `Q`, `Samp`, `Strong`, `Var`
+
+Structural:: `Span`, `Br`
+
+=== Hypertext
+
+`A`
+
+=== Lists
+
+`Dl`, `Dt`, `Dd`, `Ol`, `Ul`, `Li`
+
+=== Tables
+
+`Table`, `Caption`, `Colgroup`, `Col`, `Thead`, `Tfoot`, `Tbody`, `Tr`, `Th`, `Td`
+
+=== Forms
+
+`Form`, `Fieldset`, `Legend`, `Label`, `Input`, `Select`, `Optgroup`, `Option`, `Textarea`, `Button`
+
+=== Presentation
+
+`B`, `Big`, `I`, `Small`, `Sub`, `Sup`, `Tt`
+
+=== Other
+
+`Object`, `Param`, `Img`, `Map`, `Area`, `Meta`, `Script`, `Noscript`, `Style`, `Link`, `Base`
+
+=== Edit
+
+`Del`, `Ins`
+
+=== BIDI
+
+`Bdo`
+
+=== Ruby Annotation
+
+`Ruby`, `Rbc`, `Rtc`, `Rb`, `Rt`, `Rp`
+
+=== Transitional-only
+
+`Applet`, `Basefont`, `Center`, `Dir`, `Font`, `Iframe`, `Isindex`, `Menu`, `S`, `Strike`, `U`
+
+=== Frameset-only
+
+`Frame`, `Frameset`, `Noframes`
+
+== Namespace
+
+All elements use the XHTML namespace `http://www.w3.org/1999/xhtml` with prefix `xhtml`.
+
+== Architecture
+
+=== Element class pattern
+
+Every element follows a consistent pattern:
+
+[source,ruby]
+class Hyperlang::Xhtml::P < Lutaml::Model::Serializable
+  attribute :content, :string
+  attribute :span, Hyperlang::Xhtml::Span, collection: true
+  attribute :klass, :string
+
+  xml do
+    element "p"
+    namespace Hyperlang::Xhtml::Namespace
+    mixed_content
+    map_content to: :content
+    map_element "span", to: :span
+    map_attribute "class", to: :klass
+  end
+end
+
+Key conventions:
+
+* `mixed_content` + `map_content to: :content` for elements allowing text and child elements
+* `collection: true` for child elements that can appear multiple times
+* XML `class` attribute mapped to Ruby `:klass` to avoid collision with Ruby's `Class`
+
+=== Document tree
+
+[source]
+Html
+  +-- Head
+  |     +-- Title
+  |     +-- Meta (collection)
+  |     +-- Link (collection)
+  |     +-- Style (collection)
+  |     +-- Script (collection)
+  |     +-- Base
+  +-- Body (mixed_content)
+        +-- Div, P, Span, A, Ul, Ol, Table, H1-H6, Pre, ...
+
+=== Loading
+
+Classes are loaded in topologically sorted order (computed from dependency analysis) to ensure parent classes load before children that reference them. Leaf-node elements (`Br`, `Img`, `Span`) load first; container elements (`Html`, `Body`, `Div`) load last.
+
+== Relationship to reqif
+
+The `reqif` gem uses hyperlang for XHTML content within ReqIF documents. The `<XHTML-CONTENT>` element in ReqIF can contain any XHTML element, and reqif references hyperlang's element classes for parsing and serializing rich text content.
+
+== Development
+
+After checking out the repo:
+
+  $ bundle install
+  $ bundle exec rake
+
+== License
+
+See `hyperlang.gemspec` for license information.

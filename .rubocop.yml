@@ -1,0 +1,30 @@
+AllCops:
+  TargetRubyVersion: 3.0
+  NewCops: enable
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+Metrics/BlockLength:
+  AllowedMethods:
+    - describe
+    - context
+    - it
+    - RSpec.configure
+    - Gem::Specification.new
+    - xml
+
+Layout/LineLength:
+  Max: 500
+
+Style/RedundantFreeze:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
