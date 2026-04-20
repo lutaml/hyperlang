@@ -3,7 +3,7 @@
 module Hyperlang
   module Xhtml
     class Address < Lutaml::Model::Serializable
-      attribute :content, :string
+      attribute :content, :string, collection: true
       attribute :p, Hyperlang::Xhtml::P, collection: true
       attribute :span, Hyperlang::Xhtml::Span, collection: true
       attribute :a, Hyperlang::Xhtml::A, collection: true

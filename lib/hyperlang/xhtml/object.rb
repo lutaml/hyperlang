@@ -4,7 +4,7 @@ module Hyperlang
   module Xhtml
     class Object < Lutaml::Model::Serializable
       attribute :param, Hyperlang::Xhtml::Param, collection: true
-      attribute :content, :string
+      attribute :content, :string, collection: true
       attribute :declare, :string
       attribute :classid, :string
       attribute :codebase, :string

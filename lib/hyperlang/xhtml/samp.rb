@@ -3,7 +3,7 @@
 module Hyperlang
   module Xhtml
     class Samp < Lutaml::Model::Serializable
-      attribute :content, :string
+      attribute :content, :string, collection: true
       attribute :id, :string
       attribute :klass, :string
 

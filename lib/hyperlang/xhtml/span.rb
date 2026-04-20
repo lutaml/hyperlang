@@ -3,7 +3,7 @@
 module Hyperlang
   module Xhtml
     class Span < Lutaml::Model::Serializable
-      attribute :content, :string
+      attribute :content, :string, collection: true
       attribute :style, :string
       attribute :klass, :string
       attribute :id, :string

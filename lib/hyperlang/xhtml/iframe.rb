@@ -3,7 +3,7 @@
 module Hyperlang
   module Xhtml
     class Iframe < Lutaml::Model::Serializable
-      attribute :content, :string
+      attribute :content, :string, collection: true
       attribute :longdesc, :string
       attribute :name, :string
       attribute :src, :string

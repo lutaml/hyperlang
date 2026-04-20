@@ -3,7 +3,7 @@
 module Hyperlang
   module Xhtml
     class A < Lutaml::Model::Serializable
-      attribute :content, :string
+      attribute :content, :string, collection: true
       attribute :href, :string
       attribute :name, :string
       attribute :hreflang, :string

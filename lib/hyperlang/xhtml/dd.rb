@@ -3,7 +3,7 @@
 module Hyperlang
   module Xhtml
     class Dd < Lutaml::Model::Serializable
-      attribute :content, :string
+      attribute :content, :string, collection: true
       attribute :p, Hyperlang::Xhtml::P, collection: true
       attribute :span, Hyperlang::Xhtml::Span, collection: true
       # div omitted: creates circular dd→div→li→dd (div→li cycle, div is Phase 4, dd is Phase 3)

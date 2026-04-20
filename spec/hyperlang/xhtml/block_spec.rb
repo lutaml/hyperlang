@@ -12,7 +12,7 @@ RSpec.describe Hyperlang::Xhtml::Ul do
     XML
     ul = described_class.from_xml(xml)
     expect(ul.li.length).to eq(2)
-    expect(ul.li.first.content).to eq("Item 1")
+    expect(ul.li.first.content).to eq(["Item 1"])
   end
 end
 
@@ -29,7 +29,7 @@ RSpec.describe Hyperlang::Xhtml::Table do
     table = described_class.from_xml(xml)
     expect(table.tr.length).to eq(1)
     expect(table.tr.first.td.length).to eq(2)
-    expect(table.tr.first.td.first.content).to eq("Cell 1")
+    expect(table.tr.first.td.first.content).to eq(["Cell 1"])
   end
 
   it "parses a table with thead and tbody" do
@@ -49,8 +49,8 @@ RSpec.describe Hyperlang::Xhtml::Table do
     XML
     table = described_class.from_xml(xml)
     expect(table.thead).not_to be_nil
-    expect(table.thead.tr.first.th.first.content).to eq("Header")
+    expect(table.thead.tr.first.th.first.content).to eq(["Header"])
     expect(table.tbody.length).to eq(1)
-    expect(table.tbody.first.tr.first.td.first.content).to eq("Data")
+    expect(table.tbody.first.tr.first.td.first.content).to eq(["Data"])
   end
 end

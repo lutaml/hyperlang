@@ -3,7 +3,7 @@
 module Hyperlang
   module Xhtml
     class Noframes < Lutaml::Model::Serializable
-      attribute :content, :string
+      attribute :content, :string, collection: true
       attribute :body, Hyperlang::Xhtml::Body
       attribute :div, Hyperlang::Xhtml::Div, collection: true
       attribute :p, Hyperlang::Xhtml::P, collection: true

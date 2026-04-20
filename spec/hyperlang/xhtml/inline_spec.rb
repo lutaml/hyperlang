@@ -6,7 +6,7 @@ RSpec.describe Hyperlang::Xhtml::Span do
   it "parses a span with text content" do
     xml = '<xhtml:span xmlns:xhtml="http://www.w3.org/1999/xhtml">Hello</xhtml:span>'
     span = described_class.from_xml(xml)
-    expect(span.content).to eq("Hello")
+    expect(span.content).to eq(["Hello"])
   end
 
   it "round-trips a span with style attribute" do
@@ -21,7 +21,7 @@ RSpec.describe Hyperlang::Xhtml::P do
   it "parses a paragraph with text content" do
     xml = '<xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">Hello world</xhtml:p>'
     p = described_class.from_xml(xml)
-    expect(p.content).to eq("Hello world")
+    expect(p.content).to eq(["Hello world"])
   end
 
   it "parses a paragraph with nested spans" do
@@ -32,7 +32,7 @@ RSpec.describe Hyperlang::Xhtml::P do
     XML
     p = described_class.from_xml(xml)
     expect(p.span.length).to eq(1)
-    expect(p.span.first.content).to eq("world")
+    expect(p.span.first.content).to eq(["world"])
   end
 
   it "round-trips a paragraph with class attribute" do
@@ -54,7 +54,7 @@ RSpec.describe Hyperlang::Xhtml::Div do
     XML
     div = described_class.from_xml(xml)
     expect(div.p.length).to eq(2)
-    expect(div.p.first.content).to eq("First")
-    expect(div.p.last.content).to eq("Second")
+    expect(div.p.first.content).to eq(["First"])
+    expect(div.p.last.content).to eq(["Second"])
   end
 end
