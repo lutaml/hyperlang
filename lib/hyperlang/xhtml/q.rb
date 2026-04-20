@@ -3,7 +3,7 @@
 module Hyperlang
   module Xhtml
     class Q < Lutaml::Model::Serializable
-      attribute :content, :string
+      attribute :content, :string, collection: true
       attribute :cite, :string
       attribute :id, :string
       attribute :klass, :string

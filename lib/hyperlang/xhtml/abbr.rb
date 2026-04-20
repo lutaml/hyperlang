@@ -3,7 +3,7 @@
 module Hyperlang
   module Xhtml
     class Abbr < Lutaml::Model::Serializable
-      attribute :content, :string
+      attribute :content, :string, collection: true
       attribute :title, :string
       attribute :id, :string
       attribute :klass, :string

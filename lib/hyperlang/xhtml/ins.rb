@@ -3,7 +3,7 @@
 module Hyperlang
   module Xhtml
     class Ins < Lutaml::Model::Serializable
-      attribute :content, :string
+      attribute :content, :string, collection: true
       attribute :cite, :string
       attribute :datetime, :string
       attribute :p, Hyperlang::Xhtml::P, collection: true

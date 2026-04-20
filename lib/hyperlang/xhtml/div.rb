@@ -3,7 +3,7 @@
 module Hyperlang
   module Xhtml
     class Div < Lutaml::Model::Serializable
-      attribute :content, :string
+      attribute :content, :string, collection: true
       attribute :span, Hyperlang::Xhtml::Span, collection: true
       attribute :p, Hyperlang::Xhtml::P, collection: true
       attribute :br, Hyperlang::Xhtml::Br, collection: true

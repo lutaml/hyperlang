@@ -3,7 +3,7 @@
 module Hyperlang
   module Xhtml
     class Bdo < Lutaml::Model::Serializable
-      attribute :content, :string
+      attribute :content, :string, collection: true
       attribute :dir, :string
       attribute :id, :string
       attribute :klass, :string

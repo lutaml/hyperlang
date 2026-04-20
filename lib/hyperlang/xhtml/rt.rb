@@ -3,7 +3,7 @@
 module Hyperlang
   module Xhtml
     class Rt < Lutaml::Model::Serializable
-      attribute :content, :string
+      attribute :content, :string, collection: true
       attribute :rbspan, :integer
       attribute :id, :string
       attribute :klass, :string

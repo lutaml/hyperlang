@@ -3,7 +3,7 @@
 module Hyperlang
   module Xhtml
     class Form < Lutaml::Model::Serializable
-      attribute :content, :string
+      attribute :content, :string, collection: true
       # fieldset omitted: creates circular dependency form↔fieldset
       attribute :p, Hyperlang::Xhtml::P, collection: true
       attribute :div, Hyperlang::Xhtml::Div, collection: true

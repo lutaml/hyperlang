@@ -3,7 +3,7 @@
 module Hyperlang
   module Xhtml
     class Applet < Lutaml::Model::Serializable
-      attribute :content, :string
+      attribute :content, :string, collection: true
       attribute :codebase, :string
       attribute :archive, :string
       attribute :code, :string

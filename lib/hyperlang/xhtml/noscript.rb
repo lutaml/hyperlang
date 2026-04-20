@@ -3,7 +3,7 @@
 module Hyperlang
   module Xhtml
     class Noscript < Lutaml::Model::Serializable
-      attribute :content, :string
+      attribute :content, :string, collection: true
       attribute :p, Hyperlang::Xhtml::P, collection: true
       attribute :div, Hyperlang::Xhtml::Div, collection: true
       attribute :ul, Hyperlang::Xhtml::Ul, collection: true

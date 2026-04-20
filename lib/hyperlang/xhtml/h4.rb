@@ -3,7 +3,7 @@
 module Hyperlang
   module Xhtml
     class H4 < Lutaml::Model::Serializable
-      attribute :content, :string
+      attribute :content, :string, collection: true
       attribute :span, Hyperlang::Xhtml::Span, collection: true
       attribute :a, Hyperlang::Xhtml::A, collection: true
       attribute :strong, Hyperlang::Xhtml::Strong, collection: true

@@ -3,7 +3,7 @@
 module Hyperlang
   module Xhtml
     class Font < Lutaml::Model::Serializable
-      attribute :content, :string
+      attribute :content, :string, collection: true
       attribute :size, :string
       attribute :color, :string
       attribute :face, :string
